@@ -1,22 +1,30 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("=== Palindrome Checker App (UC3) ===");
-        System.out.print("Enter a string to check: ");
-        String originalString = scanner.nextLine();
-        String reversedString = "";
-        for (int i = originalString.length() - 1; i >= 0; i--) {
-            reversedString = reversedString + originalString.charAt(i);
+    public static boolean checkPalindrome(String input) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
         }
-        if (originalString.equals(reversedString)) {
-            System.out.println("Result: The given string is a PALINDROME.");
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
+                return false;   // Not a palindrome
+            }
+        }
+        return true;    // It is a palindrome
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("===== Palindrome Checker App - UC5 (Stack Based) =====");
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        boolean isPalindrome = checkPalindrome(input);
+        if (isPalindrome) {
+            System.out.println("Result: The given string is a Palindrome.");
         } else {
-            System.out.println("Result: The given string is NOT a palindrome.");
+            System.out.println("Result: The given string is NOT a Palindrome.");
         }
         scanner.close();
     }
 }
-
-
